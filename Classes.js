@@ -19,9 +19,35 @@
  * print every person's name using the method printName of each object
  * print out the sum of their ages using calculateAge() method
  */
+
 class Person {
-  // continue the code here
+  constructor(firstName, lastName, gender, birthYear) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.birthYear = birthYear;
+  }
+
+  printName() {
+    console.log(this.firstName, this.lastName);
+  }
+
+  calculateAge(currentYear) {
+    return currentYear - this.birthYear;
+  }
 }
+const name1 = new Person("Mariam", "Alrashdan", "female", 1997);
+const name2 = new Person("Ahmad", "Alrashdan", "Male", 2003);
+const name3 = new Person("Sara", "Alrashdan", "female", 2004);
+
+name1.printName();
+console.log(name1.calculateAge(2023));
+
+name2.printName();
+console.log(name2.calculateAge(2023));
+
+name3.printName();
+console.log(name3.calculateAge(2023));
 
 /** (Question 2): (15000 Points)
  * 1. Write a class `Movie`, give it the following properties
@@ -30,7 +56,9 @@ class Person {
  * - genre
  * - [rating]
  *
- * 2. Add the constructor that initializes all properties except the rating array, you should not pass it in the constructor method, and just initialize it with empty array.
+ * 2. Add the constructor that initializes all properties except the rating array,
+ *  you should not pass it in the constructor method
+ *  and just initialize it with empty array.
  *
  * 3. and the following the methods
  * + rate(rating),
@@ -39,14 +67,48 @@ class Person {
  *      This function will be used to make a single rating for the movie.
  * + averageRating(),
  *      That calculates the average of the rating array.
- *      if rating array includes the following data for example: [9, 9, 10, 10], then the averageRating should return 9.5 as an average
+ *      if rating array includes the following data for example: [9, 9, 10, 10],
+ *      then the averageRating should return 9.5 as an average
  *      the average equation: average = sumOfValues / countOfValues
  *      (*BONUS*): use the method reduce to calculate the average
  */
 
 class Movie {
   // continue the code here
+
+  constructor(title, duration, genre) {
+    this.title = title;
+    this.duration = duration;
+    this.genre = genre;
+    this.rating = [];
+  }
+  rate(ratingg) {
+    if (ratingg >= 0 && ratingg <= 10) {
+      this.rating.push(ratingg);
+    } else {
+      console.log(`invalid rating, rating should be between 0 - 10`);
+    }
+  }
+  averageRating() {
+    if (this.rating.length === 0) {
+      console.log("there is no rating available yet");
+    }
+    const sumOfValues = this.rating.reduce(
+      (total, rating) => total + rating,
+      0
+    );
+    const average = sumOfValues / this.rating.length;
+    return average;
+  }
 }
+const movie1 = new Movie("Shutter Island", "138 minutes", "Mystery");
+movie1.rate(9);
+//movie1.rate(17);
+movie1.rate(9);
+movie1.rate(10);
+movie1.rate(10);
+console.log(movie1.rating);
+console.log(movie1.averageRating());
 
 /** (Question 3): (1000 Points)
  * 1. Create a class `Actor` that inherits `Person`, and adds the following properties
@@ -58,3 +120,17 @@ class Movie {
  */
 
 // write the class here
+class Actor extends Person {
+  constructor(firstName, lastName, gender, birthYear, movies) {
+    super(firstName, lastName, gender, birthYear);
+    this.movies = [];
+  }
+  addMovies(movie) {
+    this.movies.push(movie);
+  }
+}
+const actor1 = new Actor("Leonardo", "DiCaprio", "Male", 1974);
+actor1.addMovies("inception");
+actor1.addMovies("The Revenant");
+actor1.addMovies("Titanic");
+console.log(actor1.movies);
