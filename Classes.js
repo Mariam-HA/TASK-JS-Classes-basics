@@ -121,9 +121,9 @@ console.log(movie1.averageRating());
 
 // write the class here
 class Actor extends Person {
+  movies = [];
   constructor(firstName, lastName, gender, birthYear, movies) {
     super(firstName, lastName, gender, birthYear);
-    this.movies = [];
   }
   addMovies(movie) {
     this.movies.push(movie);
