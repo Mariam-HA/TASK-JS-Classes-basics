@@ -75,12 +75,12 @@ console.log(name3.calculateAge(2023));
 
 class Movie {
   // continue the code here
-
+  rating = [];
   constructor(title, duration, genre) {
     this.title = title;
     this.duration = duration;
     this.genre = genre;
-    this.rating = [];
+    //this.rating = [];
   }
   rate(ratingg) {
     if (ratingg >= 0 && ratingg <= 10) {
